@@ -52,17 +52,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Modern App</title>
+    <title>Simple Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f5f8ff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -72,87 +73,71 @@
         
         .login-container {
             width: 100%;
-            max-width: 440px;
+            max-width: 400px;
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            animation: fadeIn 0.6s ease-out;
-        }
-        
-        .login-header {
-            background: linear-gradient(to right, #4f46e5, #7c3aed);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-        }
-        
-        .login-header h1 {
-            font-weight: 600;
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-        
-        .login-header p {
-            opacity: 0.9;
-        }
-        
-        .login-form {
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             padding: 30px;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .logo i {
+            font-size: 42px;
+            color: #4a6cf7;
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: 50%;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #333;
+            margin-top: 15px;
+            font-weight: 600;
         }
         
         .form-group {
             margin-bottom: 20px;
-            position: relative;
         }
         
         .form-group label {
             display: block;
             margin-bottom: 8px;
+            color: #555;
             font-weight: 500;
-            color: #374151;
             font-size: 14px;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
         }
         
         .form-input {
             width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
+            padding: 14px 14px 14px 45px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
             font-size: 16px;
-            transition: all 0.3s;
+            transition: all 0.2s;
+            color: #333;
         }
         
         .form-input:focus {
             outline: none;
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
-        }
-        
-        .input-error {
-            border-color: #ef4444;
-        }
-        
-        .error-message {
-            color: #ef4444;
-            font-size: 14px;
-            margin-top: 5px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .error-message::before {
-            content: "!";
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 16px;
-            height: 16px;
-            background-color: #ef4444;
-            color: white;
-            border-radius: 50%;
-            font-size: 12px;
-            margin-right: 6px;
+            border-color: #4a6cf7;
+            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
         }
         
         .remember-forgot {
@@ -160,6 +145,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            font-size: 14px;
         }
         
         .remember {
@@ -169,85 +155,101 @@
         
         .remember input {
             margin-right: 8px;
-            width: 16px;
-            height: 16px;
         }
         
         .forgot-link {
-            color: #4f46e5;
+            color: #4a6cf7;
             text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
         }
         
         .forgot-link:hover {
-            color: #7c3aed;
             text-decoration: underline;
         }
         
         .login-button {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(to right, #4f46e5, #7c3aed);
+            background: #4a6cf7;
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.3);
+            transition: background 0.2s;
         }
         
         .login-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 10px rgba(79, 70, 229, 0.4);
+            background: #345bc9;
         }
         
-        .login-button:active {
-            transform: translateY(0);
-        }
-        
-        .status-message {
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+        .divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 25px 0;
+            position: relative;
             text-align: center;
+        }
+        
+        .divider span {
+            position: relative;
+            top: -10px;
+            background: white;
+            padding: 0 15px;
+            color: #777;
             font-size: 14px;
-            display: none;
         }
         
-        .status-success {
-            background-color: #dcfce7;
-            color: #166534;
-            display: block;
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
         }
         
-        .status-error {
-            background-color: #fee2e2;
-            color: #b91c1c;
-            display: block;
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8faff;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s;
         }
         
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .social-btn:hover {
+            background: #f0f4ff;
+            transform: translateY(-2px);
+        }
+        
+        .social-btn i {
+            color: #4a6cf7;
+            font-size: 18px;
+        }
+        
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .signup-link a {
+            color: #4a6cf7;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .signup-link a:hover {
+            text-decoration: underline;
         }
         
         @media (max-width: 480px) {
             .login-container {
-                max-width: 100%;
-            }
-            
-            .login-form {
-                padding: 20px;
+                padding: 25px 20px;
             }
             
             .remember-forgot {
@@ -260,56 +262,67 @@
 </head>
 <body>
     <div class="login-container">
-        <div class="login-header">
+        <div class="logo">
+            <i class="fas fa-lock"></i>
             <h1>Welcome Back</h1>
-            <p>Sign in to continue to your account</p>
         </div>
         
-        <div class="login-form">
-            <!-- Session Status -->
-            <div class="status-message status-success">
-                Status message will appear here
+        <form>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+                </div>
             </div>
             
-            <form method="POST" action="#">
-                <!-- Email Address -->
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input id="email" class="form-input" type="email" name="email" required autofocus autocomplete="username" placeholder="Enter your email">
-                    <div class="error-message">Error message for email</div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-key"></i>
+                    <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
                 </div>
-
-                <!-- Password -->
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input id="password" class="form-input" type="password" name="password" required autocomplete="current-password" placeholder="Enter your password">
-                    <div class="error-message">Error message for password</div>
+            </div>
+            
+            <div class="remember-forgot">
+                <div class="remember">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me</label>
                 </div>
-
-                <!-- Remember Me -->
-                <div class="remember-forgot">
-                    <div class="remember">
-                        <input id="remember_me" type="checkbox" name="remember">
-                        <label for="remember_me">Remember me</label>
-                    </div>
-                    
-                    <a href="#" class="forgot-link">Forgot your password?</a>
-                </div>
-
-                <button type="submit" class="login-button">Log in</button>
-            </form>
+                <a href="#" class="forgot-link">Forgot password?</a>
+            </div>
+            
+            <button type="submit" class="login-button">Log In</button>
+        </form>
+        
+        <div class="divider">
+            <span>Or continue with</span>
+        </div>
+        
+        <div class="social-login">
+            <div class="social-btn">
+                <i class="fab fa-google"></i>
+            </div>
+            <div class="social-btn">
+                <i class="fab fa-facebook-f"></i>
+            </div>
+            <div class="social-btn">
+                <i class="fab fa-github"></i>
+            </div>
+        </div>
+        
+        <div class="signup-link">
+            Don't have an account? <a href="#">Sign up</a>
         </div>
     </div>
 
     <script>
-        // Simple animation and form handling for demonstration
+        // Simple form interaction
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.querySelector('form');
-            const emailInput = document.getElementById('email');
-            const passwordInput = document.getElementById('password');
-            
-            // Add focus animations
             const inputs = document.querySelectorAll('.form-input');
+            
+            // Add focus effect to inputs
             inputs.forEach(input => {
                 input.addEventListener('focus', function() {
                     this.parentElement.classList.add('focused');
@@ -320,46 +333,30 @@
                 });
             });
             
-            // Simple form validation for demo
+            // Form submission
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                let isValid = true;
                 
-                // Reset errors
-                document.querySelectorAll('.error-message').forEach(el => {
-                    el.style.display = 'none';
-                });
-                document.querySelectorAll('.form-input').forEach(el => {
-                    el.classList.remove('input-error');
-                });
+                // Get input values
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
                 
-                // Validate email
-                if (!emailInput.value || !/\S+@\S+\.\S+/.test(emailInput.value)) {
-                    emailInput.classList.add('input-error');
-                    emailInput.nextElementSibling.textContent = 'Please enter a valid email address';
-                    emailInput.nextElementSibling.style.display = 'flex';
-                    isValid = false;
-                }
-                
-                // Validate password
-                if (!passwordInput.value) {
-                    passwordInput.classList.add('input-error');
-                    passwordInput.nextElementSibling.textContent = 'Please enter your password';
-                    passwordInput.nextElementSibling.style.display = 'flex';
-                    isValid = false;
-                }
-                
-                if (isValid) {
+                // Simple validation
+                if (email && password) {
                     // In a real application, this would submit the form
-                    console.log('Form is valid. Would submit now.');
-                    // Show success message
-                    document.querySelector('.status-message').textContent = 'Login successful! Redirecting...';
-                    document.querySelector('.status-message').className = 'status-message status-success';
+                    console.log('Login attempted with:', email, password);
                     
-                    // Simulate redirect
+                    // Show loading state
+                    const button = document.querySelector('.login-button');
+                    button.textContent = 'Logging in...';
+                    button.disabled = true;
+                    
+                    // Simulate API call
                     setTimeout(() => {
                         alert('Login successful! (This is just a demo)');
-                    }, 1000);
+                        button.textContent = 'Log In';
+                        button.disabled = false;
+                    }, 1500);
                 }
             });
         });
