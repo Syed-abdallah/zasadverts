@@ -1,151 +1,94 @@
-{{-- <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout> --}}
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Login - My Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
         
         body {
-            background: #f5f8ff;
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            padding: 20px;
+            justify-content: center;
+            padding: 1rem;
         }
         
-        .login-container {
+        .container {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             width: 100%;
-            max-width: 400px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            padding: 30px;
+            max-width: 28rem;
+            padding: 2rem;
         }
         
-        .logo {
+        .header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 2rem;
         }
         
-        .logo i {
-            font-size: 42px;
-            color: #4a6cf7;
-            background: #f0f4ff;
-            padding: 15px;
-            border-radius: 50%;
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111827;
         }
         
-        .logo h1 {
-            font-size: 24px;
-            color: #333;
-            margin-top: 15px;
-            font-weight: 600;
+        .header p {
+            color: #6b7280;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
         }
         
-        .form-group label {
+        label {
             display: block;
-            margin-bottom: 8px;
-            color: #555;
+            font-size: 0.875rem;
             font-weight: 500;
-            font-size: 14px;
+            color: #374151;
+            margin-bottom: 0.5rem;
         }
         
-        .input-with-icon {
-            position: relative;
-        }
-        
-        .input-with-icon i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #999;
-        }
-        
-        .form-input {
+        input[type="email"],
+        input[type="password"] {
             width: 100%;
-            padding: 14px 14px 14px 45px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.2s;
-            color: #333;
+            padding: 0.625rem 0.875rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            transition: border-color 0.15s ease;
         }
         
-        .form-input:focus {
+        input[type="email"]:focus,
+        input[type="password"]:focus {
             outline: none;
-            border-color: #4a6cf7;
-            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+        
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
         }
         
         .remember-forgot {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            font-size: 14px;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
         }
         
         .remember {
@@ -154,209 +97,183 @@
         }
         
         .remember input {
-            margin-right: 8px;
+            margin-right: 0.5rem;
         }
         
-        .forgot-link {
-            color: #4a6cf7;
+        .forgot-password {
+            color: #4f46e5;
             text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
         }
         
-        .forgot-link:hover {
+        .forgot-password:hover {
             text-decoration: underline;
         }
         
-        .login-button {
+        button {
             width: 100%;
-            padding: 14px;
-            background: #4a6cf7;
+            background-color: #4f46e5;
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: 0.375rem;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            font-weight: 500;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: background-color 0.15s ease;
         }
         
-        .login-button:hover {
-            background: #345bc9;
+        button:hover {
+            background-color: #4338ca;
         }
         
-        .divider {
-            height: 1px;
-            background: #e2e8f0;
-            margin: 25px 0;
-            position: relative;
+        .footer {
             text-align: center;
+            margin-top: 2rem;
+            font-size: 0.875rem;
+            color: #6b7280;
         }
         
-        .divider span {
-            position: relative;
-            top: -10px;
-            background: white;
-            padding: 0 15px;
-            color: #777;
-            font-size: 14px;
-        }
-        
-        .social-login {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .social-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f8faff;
-            border: 1px solid #e2e8f0;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .social-btn:hover {
-            background: #f0f4ff;
-            transform: translateY(-2px);
-        }
-        
-        .social-btn i {
-            color: #4a6cf7;
-            font-size: 18px;
-        }
-        
-        .signup-link {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .signup-link a {
-            color: #4a6cf7;
+        .footer a {
+            color: #4f46e5;
             text-decoration: none;
             font-weight: 500;
         }
         
-        .signup-link a:hover {
+        .footer a:hover {
             text-decoration: underline;
         }
         
-        @media (max-width: 480px) {
-            .login-container {
-                padding: 25px 20px;
-            }
-            
-            .remember-forgot {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
+        .alert {
+            padding: 0.75rem 1rem;
+            border-radius: 0.375rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .alert-success {
+            background-color: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .alert-error {
+            background-color: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="logo">
-            <i class="fas fa-lock"></i>
-            <h1>Welcome Back</h1>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome back</h1>
+            <p>Sign in to your account to continue</p>
         </div>
-        
-        <form>
+
+        <!-- Session Status -->
+        <div class="alert alert-success" style="display: none;" id="sessionStatus">
+            <!-- Status message will be inserted here by JavaScript -->
+        </div>
+
+        <form method="POST" action="/login" id="loginForm">
+            <!-- CSRF Token (simulated for demonstration) -->
+            <input type="hidden" name="_token" value="simulated_csrf_token">
+
+            <!-- Email Address -->
             <div class="form-group">
                 <label for="email">Email</label>
-                <div class="input-with-icon">
-                    <i class="fas fa-envelope"></i>
-                    <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
-                </div>
+                <input type="email" id="email" name="email" required autofocus autocomplete="email">
+                <div class="error-message" id="email-error"></div>
             </div>
-            
+
+            <!-- Password -->
             <div class="form-group">
                 <label for="password">Password</label>
-                <div class="input-with-icon">
-                    <i class="fas fa-key"></i>
-                    <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
-                </div>
+                <input type="password" id="password" name="password" required autocomplete="current-password">
+                <div class="error-message" id="password-error"></div>
             </div>
-            
+
+            <!-- Remember Me -->
             <div class="remember-forgot">
                 <div class="remember">
-                    <input type="checkbox" id="remember">
-                    <label for="remember">Remember me</label>
+                    <input type="checkbox" id="remember_me" name="remember">
+                    <label for="remember_me" style="display: inline; font-size: 0.875rem;">Remember me</label>
                 </div>
-                <a href="#" class="forgot-link">Forgot password?</a>
+                <a href="/forgot-password" class="forgot-password">Forgot password?</a>
             </div>
-            
-            <button type="submit" class="login-button">Log In</button>
+
+            <button type="submit">Log in</button>
         </form>
-        
-        <div class="divider">
-            <span>Or continue with</span>
-        </div>
-        
-        <div class="social-login">
-            <div class="social-btn">
-                <i class="fab fa-google"></i>
-            </div>
-            <div class="social-btn">
-                <i class="fab fa-facebook-f"></i>
-            </div>
-            <div class="social-btn">
-                <i class="fab fa-github"></i>
-            </div>
-        </div>
-        
-        <div class="signup-link">
+
+        <div class="footer">
             Don't have an account? <a href="/register">Sign up</a>
         </div>
     </div>
 
     <script>
-        // Simple form interaction
         document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('form');
-            const inputs = document.querySelectorAll('.form-input');
+            const loginForm = document.getElementById('loginForm');
+            const emailError = document.getElementById('email-error');
+            const passwordError = document.getElementById('password-error');
+            const sessionStatus = document.getElementById('sessionStatus');
             
-            // Add focus effect to inputs
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.parentElement.classList.add('focused');
-                });
-                
-                input.addEventListener('blur', function() {
-                    this.parentElement.classList.remove('focused');
-                });
-            });
+            // Simulate session status (for demonstration)
+            const simulateSessionStatus = () => {
+                const status = "Login successful!"; // This would come from the server
+                if (status) {
+                    sessionStatus.textContent = status;
+                    sessionStatus.style.display = 'block';
+                    
+                    // Hide after 5 seconds
+                    setTimeout(() => {
+                        sessionStatus.style.display = 'none';
+                    }, 5000);
+                }
+            };
             
-            // Form submission
-            form.addEventListener('submit', function(e) {
+            // Simulate form submission
+            loginForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                // Get input values
+                // Reset errors
+                emailError.textContent = '';
+                passwordError.textContent = '';
+                
+                // Simple validation
                 const email = document.getElementById('email').value;
                 const password = document.getElementById('password').value;
                 
-                // Simple validation
-                if (email && password) {
-                    // In a real application, this would submit the form
-                    console.log('Login attempted with:', email, password);
+                let isValid = true;
+                
+                if (!email) {
+                    emailError.textContent = 'Email is required.';
+                    isValid = false;
+                } else if (!/\S+@\S+\.\S+/.test(email)) {
+                    emailError.textContent = 'Email is invalid.';
+                    isValid = false;
+                }
+                
+                if (!password) {
+                    passwordError.textContent = 'Password is required.';
+                    isValid = false;
+                } else if (password.length < 8) {
+                    passwordError.textContent = 'Password must be at least 8 characters.';
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    // In a real application, this would submit to the server
+                    console.log('Form submitted with:', { email, password });
                     
-                    // Show loading state
-                    const button = document.querySelector('.login-button');
-                    button.textContent = 'Logging in...';
-                    button.disabled = true;
+                    // Simulate successful login
+                    simulateSessionStatus();
                     
-                    // Simulate API call
-                    setTimeout(() => {
-                        alert('Login successful! (This is just a demo)');
-                        button.textContent = 'Log In';
-                        button.disabled = false;
-                    }, 1500);
+                    // Redirect to dashboard after successful login (simulated)
+                    // setTimeout(() => {
+                    //     window.location.href = '/dashboard';
+                    // }, 1000);
                 }
             });
         });
