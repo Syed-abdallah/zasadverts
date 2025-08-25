@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/table', function () {
+    return view('dashboard.table'); // resources/views/table.blade.php
+})->name('table.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
