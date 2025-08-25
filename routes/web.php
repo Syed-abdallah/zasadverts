@@ -2,24 +2,50 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ReguserController;
+use App\Http\Controllers\ContactusController;
+use App\Http\Controllers\SpotlightController;
+use App\Http\Controllers\FrontPortfolioController;
+use App\Http\Controllers\ProductImageController;
+use App\Http\Controllers\TestinomialImageController;
+use App\Http\Controllers\RoleController;
 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/table', function () {
-    return view('dashboard.table'); // resources/views/table.blade.php
-})->name('table.index');
+Route::middleware(['auth'])->group(function () {
+   Route::resource('permissions', PermissionController::class);
+       Route::resource('roles', RoleController::class); 
+       
+    Route::get('/userregister', [ReguserController::class, 'index'])->name('newuser.register');
+ 
+    Route::post('/registers', [ReguserController::class, 'registeruser'])->name('register.user');
+    Route::post('/submit-form', [ContactusController::class, 'store'])->name('form.store');
+
+});
+Route::middleware(['auth'])->prefix('/mainpage')->group(function () {
+
+    Route::resource('spotlight', SpotlightController::class);
+Route::resource('frontportfolio', FrontPortfolioController::class);
+Route::resource('productimages', ProductImageController::class);
+Route::resource('testinomialimages', TestinomialImageController::class);
+    
+    Route::get('/videos_section', function () {
+        return view('dashboard.videosection');
+    })->name('videosection.index');
+    
+
+    
+
+
+    
+       Route::resource('faqs', FaqController::class);
+    
+
+Route::put('roles/{role}', [RoleController::class, 'update'])->name('roles.update');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

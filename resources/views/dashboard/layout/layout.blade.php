@@ -8,9 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('dashboardfiles/images/favicon.png') }}">
-    <title>testing</title>
+  @php 
+   $web_name= \DB::table('site_settings')->first();                
+@endphp
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset($web_name->logo_path) }}">
+
+
+
+    <title style="color: {{ $web_name->name_color }};">{{ $web_name->website_name }}</title>
+ 
 
     <!-- DataTables CSS -->
     <link rel="stylesheet"
@@ -20,6 +26,13 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('dashboardfiles/dist/css/style.min.css') }}">
+
+
+<!-- Summernote CSS -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
     <style>
@@ -74,11 +87,6 @@
             color: #f1f1f1 !important;
         }
 
-        /* Cards */
-        [data-theme="dark"] .card {
-            background-color: #2c2c2c !important;
-            color: #f1f1f1 !important;
-        }
 
         /* Dropdowns */
         [data-theme="dark"] .dropdown-menu {
@@ -155,23 +163,7 @@
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
-            <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-light-emphasis font-weight-medium mb-1">Basic
-                            Initialisation</h4>
-                        <div class="d-flex align-items-center">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">Library</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+         @include('dashboard/layout/breadcrumb')
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -226,7 +218,30 @@
     </script>
     <script src="{{ asset('dashboardfiles/dist/js/pages/datatable/datatable-basic.init.js') }}"></script>
 
+<!-- Summernote JS -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
+<!-- If you want to support image uploads, you'll need to initialize with custom settings -->
+<script>
+$(document).ready(function() {
+    $('#text').summernote({
+        height: 300,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ],
+     
+    });
+
+
+});
+</script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
