@@ -11,10 +11,16 @@ use App\Http\Controllers\FrontPortfolioController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\TestinomialImageController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\FrontendController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+Route::get('/', [FrontendController::class, 'welcome']);
+
 Route::middleware(['auth'])->group(function () {
    Route::resource('permissions', PermissionController::class);
        Route::resource('roles', RoleController::class); 
@@ -32,9 +38,7 @@ Route::resource('frontportfolio', FrontPortfolioController::class);
 Route::resource('productimages', ProductImageController::class);
 Route::resource('testinomialimages', TestinomialImageController::class);
     
-    Route::get('/videos_section', function () {
-        return view('dashboard.videosection');
-    })->name('videosection.index');
+Route::resource('videos', VideoController::class);
     
 
     

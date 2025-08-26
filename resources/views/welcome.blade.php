@@ -1335,7 +1335,7 @@
                                     src="https://www.amzonestep.com/front/images/spotlight-appearances.png"
                                     alt="Spotlight Appearances">
                             </div>
-                            <div class="col-md-12">
+                            {{-- <div class="col-md-12">
                                 <div class="brand-logo owl-carousel">
                                     <span class="single-brand-logo">
                                         <img src="https://www.amzonestep.com/front/images/white-label.png"
@@ -1366,7 +1366,18 @@
                                             alt="Orange Klik logo">
                                     </span>
                                 </div>
-                            </div>
+                            </div> --}}
+                            <div class="col-md-12">
+    <div class="brand-logo owl-carousel">
+        @foreach($spotlights as $spotlight)
+            <span class="single-brand-logo">
+                <img src="{{ asset($spotlight->image) }}" 
+                     alt="Spotlight Logo {{ $loop->iteration }}">
+            </span>
+        @endforeach
+    </div>
+</div>
+
                         </div>
                     </div>
                 </div>
@@ -1481,7 +1492,7 @@
                                     transform: scale(1);
                                 }
                             </style>
-                            <div class="portfolio-animation owl-carousel owl-theme">
+                            {{-- <div class="portfolio-animation owl-carousel owl-theme">
                                 <div class="item"><img width="251px" height="520px" class="img-fluid"
                                         src="https://www.amzonestep.com/front/images/portfolio01.png"
                                         alt="Portfolio 1" loading="lazy"></div>
@@ -1503,6 +1514,15 @@
                                 <div class="item"><img width="251px" height="520px" class="img-fluid"
                                         src="https://www.amzonestep.com/front/images/portfolio07.png"
                                         alt="Portfolio 5" loading="lazy"></div>
+                            </div> --}}
+                            <div class="portfolio-animation owl-carousel owl-theme">
+                                @foreach ($frontportfolios as $portfolio)
+                                    <div class="item">
+                                        <img width="251px" height="520px" class="img-fluid"
+                                            src="{{ asset($portfolio->image) }}"
+                                            alt="Portfolio Image {{ $loop->iteration }}" loading="lazy">
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                         <style>
@@ -1526,7 +1546,7 @@
                                 margin-top: 20px;
                             }
                         </style>
-                        <div class="col-md-10 col-lg-8  mx-auto">
+                        {{-- <div class="col-md-10 col-lg-8  mx-auto">
                             <h2 class="text-center mt-5 mb-5 white"><span class="line4">Product Images</span></h2>
                             <!-- Large Image Carousel -->
                             <div id="largeImageCarousel" class="owl-carousel owl-theme large-image-carousel ">
@@ -1570,8 +1590,34 @@
                                         src="https://www.amzonestep.com/front/images/product-image6.png"
                                         alt="Image 6"></div>
                             </div>
-                        </div>
-                        
+                        </div> --}}
+                        <div class="col-md-10 col-lg-8 mx-auto">
+    <h2 class="text-center mt-5 mb-5 white"><span class="line4">Product Images</span></h2>
+    
+    <!-- Large Image Carousel -->
+    <div id="largeImageCarousel" class="owl-carousel owl-theme large-image-carousel">
+        @foreach($productimages as $image)
+            <div class="item">
+                <img width="856px" height="481px" class="img-fluid"
+                     src="{{ asset($image->image) }}"
+                     alt="Product Image {{ $loop->iteration }}">
+            </div>
+        @endforeach
+    </div>
+
+    <!-- Thumbnail Carousel -->
+    <div id="thumbnailCarousel" class="owl-carousel owl-theme thumbnail-carousel">
+        @foreach($productimages as $image)
+            <div class="item">
+                <img width="139px" height="78px" class="img-fluid"
+                     src="{{ asset($image->image) }}"
+                     alt="Product Image {{ $loop->iteration }}">
+            </div>
+        @endforeach
+    </div>
+</div>
+
+
                         <h2 class="text-center mt-5 mb-5 white"><span class="line5">A+ content</span></h2>
                     </div>
                 </div>
@@ -1678,7 +1724,7 @@
                             </video>
                         </div>
                     </div>
-                    <div class="col-md-12 mb-3">
+                    {{-- <div class="col-md-12 mb-3">
                         <!-- Partners -->
                         <div class="testimonials-one owl-carousel">
                             <div class="single-brand-logo">
@@ -1737,7 +1783,40 @@
                                     alt="AMZ One Step Testimonials">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
+
+                    @php
+    $half = ceil($testimonials->count() / 2); 
+    $firstRow = $testimonials->take($half);
+    $secondRow = $testimonials->skip($half);
+@endphp
+
+<div class="col-md-12 mb-3">
+    <!-- Testimonials Row 1 -->
+    <div class="testimonials-one owl-carousel">
+        @foreach($firstRow as $testimonial)
+            <div class="single-brand-logo">
+                <img loading="lazy" width="437px" height="250px" class="img-fluid"
+                     src="{{ asset($testimonial->image) }}"
+                     alt="Testimonial Image {{ $loop->iteration }}">
+            </div>
+        @endforeach
+    </div>
+</div>
+
+<div class="col-md-12 mb-4 pb-5">
+    <!-- Testimonials Row 2 -->
+    <div class="testimonials-two owl-carousel">
+        @foreach($secondRow as $testimonial)
+            <div class="single-brand-logo">
+                <img loading="lazy" width="437px" height="250px" class="img-fluid"
+                     src="{{ asset($testimonial->image) }}"
+                     alt="Testimonial Image {{ $loop->iteration + $half }}">
+            </div>
+        @endforeach
+    </div>
+</div>
+
                 </div>
             </div>
         </section>
@@ -2088,7 +2167,7 @@
                                                                         name="Country_Code__c" size="20"
                                                                         type="hidden"
                                                                         class="form-control theme-input-style country_code invisible" />
-                                                                    <input type="tel" class="form-control"
+                                                                    <input type="number" class="form-control"
                                                                         required placeholder="Your Phone Number"
                                                                         name="phone" id="phone">
                                                                 </div>
@@ -2192,7 +2271,7 @@
                     <h2><span class="line15">Frequently asked questions</span></h2>
                     <p class="lead">Here are answers to most common questions. Can't find an answer? Call us!</p>
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-md-8" style="padding-right:80px;">
                         <div class="accordion accordion-flush" id="accordionFlushExample">
                             <div class="accordion-item">
@@ -2392,7 +2471,47 @@
                                     loading="lazy" src="https://www.amzonestep.com/front/images/cta-icon.png"
                                     alt="Get a Quote from AZM One Step" /></a></p>
                     </div>
+                </div> --}}
+
+                <div class="row">
+                    <div class="col-md-8" style="padding-right:80px;">
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            @foreach ($faqs as $index => $faq)
+                                <div class="accordion-item">
+                                    <p class="accordion-header" id="flush-heading{{ $index }}">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapse{{ $index }}" aria-expanded="false"
+                                            aria-controls="flush-collapse{{ $index }}">
+                                            {{ $faq->question }}
+                                        </button>
+                                    </p>
+                                    <div id="flush-collapse{{ $index }}" class="accordion-collapse collapse"
+                                        aria-labelledby="flush-heading{{ $index }}"
+                                        data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            {!! $faq->answer !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 text-center align-self-center">
+                        <img loading="lazy" width="370px" height="330px" class="img-fluid"
+                            src="https://www.amzonestep.com/front/images/suport.png"
+                            alt="Book a Free Call with AMZ One Step Consultants" />
+                        <p class="text-center mt-5">
+                            <a href="#leadsform" class="btn-cta">
+                                Book A Free Call
+                                <img loading="lazy" src="https://www.amzonestep.com/front/images/cta-icon.png"
+                                    alt="Get a Quote" />
+                            </a>
+                        </p>
+                    </div>
                 </div>
+
             </div>
         </section>
         <section id="footer" class="green-bg-2">
@@ -2474,9 +2593,8 @@
                                 <h5>Stay in Touch</h5>
                                 <p>Our social links for more inspirational content.</p>
                                 <div class="social mb-4">
-                                    <a href="https://www.facebook.com/AMZonestep/"
-                                        aria-label="AMZ One Step Facebook" rel="nofollow"><i
-                                            class="fa fa-facebook-f"></i></a>
+                                    <a href="https://www.facebook.com/AMZonestep/" aria-label="AMZ One Step Facebook"
+                                        rel="nofollow"><i class="fa fa-facebook-f"></i></a>
                                     <a href="https://www.instagram.com/amzonestep/?hl=en"
                                         aria-label="AMZ One Step Instagram" rel="nofollow"><i
                                             class="fa fa-instagram"></i></a>

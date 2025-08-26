@@ -12,9 +12,9 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="card-title text-light-emphasis">FAQ's</h4>
-                            @can('create faqs')
+                            {{-- @can('create faqs') --}}
                                 <a href="{{ route('faqs.create') }}" class="btn btn-success">Create FAQ</a>
-                            @endcan
+                            {{-- @endcan --}}
                         </div>
 
                         @if (session('success'))
@@ -60,15 +60,15 @@
                                     </button>
                                     @endcan --}}
 
-                                    @can('delete faq')
-                                    <form action="{{ route('cfadmin.faqs.destroy', $faq->id) }}" method="POST" style="display: inline-block;">
+                                    {{-- @can('delete faq') --}}
+                                    <form action="{{ route('faqs.destroy', $faq->id) }}" method="POST" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
                                             <i class="icon-trash"></i>
                                         </button>
                                     </form>
-                                    @endcan
+                                    {{-- @endcan --}}
                                 </td>
                             </tr>
                         @empty
