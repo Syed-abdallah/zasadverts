@@ -15,6 +15,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\FrontendController;
 
+
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -47,6 +49,10 @@ Route::resource('videos', VideoController::class);
 
     
        Route::resource('faqs', FaqController::class);
+
+       
+Route::get('/leads', [ContactusController::class, 'index'])->name('leads.index');
+Route::get('/leads/{id}', [ContactusController::class, 'show'])->name('leads.show');
     
 
 Route::put('roles/{role}', [RoleController::class, 'update'])->name('roles.update');

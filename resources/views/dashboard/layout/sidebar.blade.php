@@ -121,11 +121,7 @@
                                 </ul>
                             </li>
 
-                            {{-- <li class="sidebar-item"><a href="{{ route('contactus.index') }}" class="sidebar-link"><span
-                                        class="hide-menu text-light-emphasis">
-                                        Contact Us Requests
-                                    </span></a>
-                            </li> --}}
+                          
 
 
                             <li class="sidebar-item"> <a class="has-arrow sidebar-link" href="javascript:void(0)"
@@ -140,6 +136,11 @@
                                             </span></a></li>
 
                                 </ul>
+                            </li>
+                              <li class="sidebar-item"><a href="{{ route('leads.index') }}" class="sidebar-link"><span
+                                        class="hide-menu text-light-emphasis">
+                                        Leads
+                                    </span></a>
                             </li>
                         </ul>
                     </li>

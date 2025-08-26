@@ -1233,13 +1233,24 @@
                                 src="https://www.amzonestep.com/front/images/cta-icon.png"
                                 alt="Get a Quote from AZM One Step" /></a>
                     </div>
-                    <div class="col-md-12 col-lg-6 ">
+                    {{-- <div class="col-md-12 col-lg-6 ">
                         <video controls playsinline width="100%" height="auto"
                             poster="https://www.amzonestep.com/front/images/thumb.png">
                             <source src="https://www.amzonestep.com/front/videos/video-intro.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
-                    </div>
+                    </div> --}}
+                    <div class="col-md-12 col-lg-6">
+  @if($videos->count() > 0)
+    <video controls playsinline width="100%" height="auto"
+        poster="{{ $videos[0]->thumbnail ?? asset('front/images/thumb.png') }}">
+        <source src="{{ asset('videos/' . $videos[0]->url) }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+@endif
+
+</div>
+
                 </div>
             </div>
         </section>
@@ -1529,7 +1540,7 @@
                     <p class="text-center">This is what our clients have to say about us.</p>
                     <div class="col-md-12 owl-theme mb-4">
                         <!-- Partners -->
-                        <div class="testimonials-video">
+                        {{-- <div class="testimonials-video">
                             <video controls playsinline width="100%"
                                 poster="https://www.amzonestep.com/front/images/testimonial-video1.png"
                                 style="max-width: 100%; height: auto;">
@@ -1537,7 +1548,18 @@
                                     type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
-                        </div>
+                        </div> --}}
+                        <div class="testimonials-video">
+    @if($videos->count() > 1)
+        <video controls playsinline width="100%"
+            poster="{{ $videos[1]->thumbnail ?? 'https://www.amzonestep.com/front/images/testimonial-video1.png' }}"
+            style="max-width: 100%; height: auto;">
+            <source src="{{ $videos[1]->url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    @endif
+</div>
+
                     </div>
                  
                     @php
@@ -1596,11 +1618,21 @@
                                 One Step VIP <img loading="lazy" alt="Get a Quote from AZM One Step"
                                     src="https://www.amzonestep.com/front/images/cta-icon.png" /></a>
                         </div>
-                        <div class="col-md-5 vip-right-col">
+                        {{-- <div class="col-md-5 vip-right-col">
                             <img loading="lazy" width="652px" height="367px" class="img-fluid"
                                 src="https://www.amzonestep.com/front/images/amz-vip.png"
                                 alt="AMZ One Step VIP Access" />
-                        </div>
+                        </div> --}}
+                        <div class="col-md-5 vip-right-col">
+    @if($videos->count() > 3)
+        <video controls playsinline width="100%" height="auto"
+            poster="{{ $videos[3]->thumbnail ?? 'https://www.amzonestep.com/front/images/amz-vip.png' }}">
+            <source src="{{ $videos[3]->url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    @endif
+</div>
+
                     </div>
                 </div>
             </div>
@@ -1620,13 +1652,23 @@
                         <p class="lead">Elevate your product listings with SEO and optimization strategies, ensuring
                             your listings shine in Amazon's competitive online arena.</p>
                     </div>
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <iframe width="100%" height="315"
                             src="https://www.youtube.com/embed/P3poH9RAFJc?si=ZSsWGUcjho94c16R&amp;controls=0"
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
+                    </div> --}}
+                    <div class="col-md-6">
+    @if($videos->count() > 2)
+        <video controls playsinline width="100%" height="315"
+            poster="{{ $videos[2]->thumbnail ?? 'https://www.amzonestep.com/front/images/thumb.png' }}">
+            <source src="{{ $videos[2]->url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    @endif
+</div>
+
                 </div>
                 <div class="col-md-11 mx-auto">
                     <div class="row featurette py-4">
