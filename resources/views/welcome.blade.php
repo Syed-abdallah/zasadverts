@@ -1245,7 +1245,7 @@
 
   @if($videos->count() > 0)
 
-    <video controls playsinline width="100%" height="auto"
+            <video controls playsinline width="100%" height="auto"
         poster="{{ $videos[0]->thumbnail }}" poster="https://www.amzonestep.com/front/images/thumb.png">
         <source src="{{ asset( $videos[0]->video) }}" type="video/mp4">
         Your browser does not support the video tag.
@@ -1657,8 +1657,8 @@
                     </div> --}}
                     <div class="col-md-6">
  @if($videos->count() > 0 && !empty($videos[3]->video))
-    <video controls playsinline width="100%" height="auto"
-        poster="{{ $videos[3]->thumbnail ?? asset('front/images/thumb.png') }}">
+           <video controls playsinline width="100%" height="auto"
+        poster="{{ $videos[3]->thumbnail }}" poster="https://www.amzonestep.com/front/images/thumb.png">
         <source src="{{ asset($videos[3]->video) }}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
