@@ -17,7 +17,7 @@
 
             <!-- Name -->
             <div>
-                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <label for="name" class="block text-sm font-medium text-gray-700 text-dark-emphasis">Name</label>
                 <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus
                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
                 @error('name')
@@ -27,7 +27,7 @@
 
             <!-- Email -->
             <div class="mt-4">
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <label for="email" class="block text-sm font-medium text-gray-700 ">Email</label>
                 <input id="email" type="email" name="email" value="{{ old('email') }}" required
                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
                 @error('email')

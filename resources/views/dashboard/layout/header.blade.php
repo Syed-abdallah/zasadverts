@@ -9,9 +9,28 @@
                     <!-- ============================================================== -->
                     <div class="navbar-brand">
                         <!-- Logo icon -->
-                        <a href="index.html">
+                        {{-- <a href="index.html">
                             <img src="../assets/images/freedashDark.svg" alt="" class="img-fluid">
-                        </a>
+                        </a> --}}
+                           @php
+                    // Fetch logo data directly from database
+                    $siteSettings = DB::table('site_settings')->first();
+                    $logoPath = $siteSettings->logo_path ?? null;
+                @endphp
+
+                @if ($logoPath && file_exists(public_path($logoPath)))
+                    @php
+                        $logoUrl = asset($logoPath);
+                        $altText = $siteSettings->website_name ?? config('app.name');
+                    @endphp
+
+                    <img src="{{ $logoUrl }}" alt="{{ $altText }} Logo" height="83" width="170"
+                        class="me-2" style="margin-left: 30px;">
+                @else
+                    <div class="me-2 bg-light d-inline-block" style="height:60px; width:90px; margin-left:30px;">
+                    </div>
+                @endif
+
                     </div>
                     <!-- ============================================================== -->
                     <!-- End Logo -->
@@ -132,10 +151,10 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                <img src="../assets/images/users/profile-pic.jpg" alt="user"
-                                    class="rounded-circle" width="40">
+                                {{-- <img src="../assets/images/users/profile-pic.jpg" alt="user"
+                                    class="rounded-circle" width="40"> --}}
                                 <span class="ms-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                                        class="text-light-emphasis">Jason Doe</span> <i data-feather="chevron-down"
+                                        class="text-light-emphasis">{{ Auth::user()->name }}</span> <i data-feather="chevron-down"
                                         class="svg-icon"></i></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-right user-dd animated flipInY">

@@ -6,6 +6,7 @@ use App\Models\FrontPortfolio;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use App\Models\Spotlight;
+use App\Models\SiteSetting;
 use App\Models\TestinomialImage; // (or TestimonialImage if you fix spelling)
 
 
@@ -18,7 +19,8 @@ public function welcome()
     $productimages = ProductImage::latest()->take(6)->get();
      $spotlights = Spotlight::latest()->get(); // spotlight logos
     $testimonials = TestinomialImage::latest()->get(); // testimonial images
+    $settings = SiteSetting::first(); // get site settings (e.g. logo)
 
-        return view('welcome', compact('faqs', 'frontportfolios', 'productimages', 'spotlights', 'testimonials'));
+        return view('welcome', compact('faqs', 'frontportfolios', 'productimages', 'spotlights', 'testimonials', 'settings'));
     }
 }

@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
             @csrf
 
             <div class="mb-3">
-                <label for="name" class="form-label">Full Name</label>
+                <label for="name" class="form-label text-dark-emphasis">Full Name</label>
                 <input type="text" class="form-control @error('name') is-invalid @enderror" 
                        id="name" name="name" value="{{ old('name') }}" required>
                 <div class="invalid-feedback" id="nameError">
@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <div class="mb-3">
-                <label for="email" class="form-label">Email Address</label>
+                <label for="email" class="form-label text-dark-emphasis">Email Address</label>
                 <input type="email" class="form-control @error('email') is-invalid @enderror" 
                        id="email" name="email" value="{{ old('email') }}" required>
                 <div class="invalid-feedback" id="emailError">
@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label for="password" class="form-label text-dark-emphasis">Password</label>
                 <input type="password" class="form-control @error('password') is-invalid @enderror" 
                        id="password" name="password" required>
                 <div class="invalid-feedback" id="passwordError">
@@ -325,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <div class="mb-3">
-                <label for="password_confirmation" class="form-label">Confirm Password</label>
+                <label for="password_confirmation" class="form-label text-dark-emphasis">Confirm Password</label>
                 <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" 
                        id="password_confirmation" name="password_confirmation" required>
                 <div class="invalid-feedback" id="confirmPasswordError">
@@ -335,9 +335,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             <!-- Role Selection Section -->
             <div class="card border-0 shadow-sm mb-4">
-                <div class="card-header bg-light py-3">
+                <div class="card-header bg-light py-3" >
                     <h5 class="mb-0">
-                        <i class="fas fa-user-shield me-2"></i>Assign Roles
+                        <i class="fas fa-user-shield me-2 text-dark-emphasis" ></i>Assign Roles
                     </h5>
                 </div>
                 <div class="card-body">
@@ -345,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         @foreach($roles as $role)
                             @if($role->name !== 'superadmin')
                             <div class="col-md-6">
-                                <div class="role-card p-3 rounded border hover-shadow bg-light">
+                                <div class="role-card p-3 rounded border hover-shadow " style="background-color: rgb(44, 44, 44)">
                                     <div class="form-check mb-0">
                                         <input class="form-check-input" type="checkbox" 
                                                name="roles[]" value="{{ $role->name }}"

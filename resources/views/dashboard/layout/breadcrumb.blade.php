@@ -19,7 +19,7 @@
                     }
                 @endphp
               
-              <span class="text-light-emphasis"> {{ $greeting }}, {{ Auth::user()->name }} ! </span>
+              <span class="text-light-emphasis">{{ $greeting }},{{ Auth::user()->name }} ! </span>
              
             @else
                 Welcome!
